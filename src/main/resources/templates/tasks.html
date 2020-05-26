@@ -20,6 +20,9 @@
         </td>
         <td th:text="${r.naam}"/>
         <td th:text="${r.dueDate}"/>
+        <td>
+            <a th:href="@{/TaskList/edit/{id} (id=${r.id})}"> Edit Task</a>
+        </td>
     </tr>
 </table>
 

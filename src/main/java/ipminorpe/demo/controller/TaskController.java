@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.model.IModel;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -38,11 +40,26 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public String addTask(Model model, @ModelAttribute Task task) {
-
+    public String addTask(@ModelAttribute Task task) {
         taskList.addTask(task);
         System.out.println(task.toString());
         return "redirect:/TaskList/Tasks";
+
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editTask(Model model, @PathVariable UUID id){
+        model.addAttribute("id", id);
+         model.addAttribute("taak", taskList.findTaskById(id));
+         return "editTask";
+    }
+
+    @PostMapping("/confEdit")
+    public String confirmEdit(@ModelAttribute Task task,  @RequestParam UUID nummer){
+        System.out.println(task.toString());
+        task.setId(nummer);
+        taskList.updateTask(task);
+        return "redirect:/TaskList/Tasks/"+ task.getId() ;
 
     }
 }

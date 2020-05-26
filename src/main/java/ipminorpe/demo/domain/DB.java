@@ -32,9 +32,34 @@ public class DB implements TaskList {
         return description;
     }
 
+    @Override
+    public Task findTaskById(UUID id) {
+
+        for(Task x : tasks){
+            if(x.id.equals(id)){
+                return x;
+            }
+            else return null;
+        }
+        return null;
+    }
+
     public void addTask(Task task){
         tasks.add(task);
     }
+
+
+    public void updateTask(Task task){
+        for(Task x : tasks){
+            if(x.id.equals(task.id)){
+                x.setNaam(task.getNaam());
+                x.setDueDate(task.getDateTime());
+                x.setDescription(task.getDescription());
+
+            }
+        }
+    }
+
 
 
 }

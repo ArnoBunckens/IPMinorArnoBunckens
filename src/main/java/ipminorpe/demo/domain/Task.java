@@ -29,6 +29,10 @@ public class Task {
 
 
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
     }

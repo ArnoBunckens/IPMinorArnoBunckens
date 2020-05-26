@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/TaskList/confEdit}" th:object="${taak}" method="post">
+
+    <input type="hidden" th:value="*{id}" name="nummer">
+
+    <input type="text" th:field="*{naam}" name="naam" id="naam">
+    <label for="naam"></label>
+
+
+    <label for="description"></label>
+    <input type="text" name="description" id="description" th:field="*{description}">
+
+    <label for="dateTime"></label>
+    <input type="datetime-local" name="dateTime" id="dateTime" th:field="*{dateTime}">
+
+
+    <input type="submit">
+</form>
+
+</body>
+</html>

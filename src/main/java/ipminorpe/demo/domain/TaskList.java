@@ -8,6 +8,8 @@ public interface TaskList {
     List<Task> getAll();
 
     Task findDescription(UUID id);
+
+    Task findTaskById(UUID id);
 }
 
 
