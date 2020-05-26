@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Time</th>
+    </tr>
+
+    <tr th:each="r: ${tasks}">
+
+        <td>
+            <a th:href="@{/TaskList/Tasks/{id} (id=${r.id})}"
+               th:text="${r.id}"></a>
+        </td>
+        <td th:text="${r.naam}"/>
+        <td th:text="${r.dueDate}"/>
+    </tr>
+</table>
+
+</body>
+</html>
