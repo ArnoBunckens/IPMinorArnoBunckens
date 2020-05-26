@@ -7,15 +7,18 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Task {
-    public UUID id;
-    public String naam;
+    private UUID id;
+    private String naam;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    public LocalDateTime dateTime;
-    public String dueDate;
-    public String description;
+    private LocalDateTime dateTime;
+    private String dueDate;
+    private String description;
+    private ArrayList<Subtask> subtasks;
 
 
     public Task(String naam, LocalDateTime dateTime, String description) {
@@ -24,10 +27,18 @@ public class Task {
         this.dateTime = dateTime;
         setDueDate(dateTime);
         this.description = description;
+        this.subtasks = new ArrayList<>();
 
     }
 
 
+    public ArrayList<Subtask> getSubtasks() {
+        return subtasks;
+    }
+
+    public void setSubtasks(ArrayList<Subtask> subtasks) {
+        this.subtasks = subtasks;
+    }
 
     public void setId(UUID id) {
         this.id = id;
@@ -76,5 +87,13 @@ public class Task {
 
     public String toString(){
         return this.getId() + this.getNaam() + this.getDateTime() + this.getDescription();
+    }
+
+    public void addSubtask(Subtask subtask){
+        subtasks.add(subtask);
+    }
+
+    public List<Subtask> getAllSubtasks() {
+        return this.subtasks;
     }
 }

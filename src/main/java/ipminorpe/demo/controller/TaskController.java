@@ -1,34 +1,31 @@
 package ipminorpe.demo.controller;
 
 import ipminorpe.demo.domain.DB;
+import ipminorpe.demo.domain.Subtask;
 import ipminorpe.demo.domain.Task;
-import ipminorpe.demo.domain.TaskList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.model.IModel;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/TaskList")
+@RequestMapping("/taskList")
 public class TaskController {
     @Autowired
     DB taskList;
 
-    @GetMapping("/Tasks")
+    @GetMapping("/tasks")
     public String tasks(Model model) {
         model.addAttribute("tasks", taskList.getAll());
         return "tasks";
     }
 
-    @GetMapping("/Tasks/{id}")
+    @GetMapping("/tasks/{id}")
     public String taskDetail(Model model, @PathVariable UUID id) {
         model.addAttribute("taakje", taskList.findDescription(id));
+        model.addAttribute("taakjes", taskList.findTaskById(id).getAllSubtasks());
         return "taskDetail";
     }
 
@@ -43,7 +40,7 @@ public class TaskController {
     public String addTask(@ModelAttribute Task task) {
         taskList.addTask(task);
         System.out.println(task.toString());
-        return "redirect:/TaskList/Tasks";
+        return "redirect:/taskList/tasks";
 
     }
 
@@ -59,7 +56,19 @@ public class TaskController {
         System.out.println(task.toString());
         task.setId(nummer);
         taskList.updateTask(task);
-        return "redirect:/TaskList/Tasks/"+ task.getId() ;
+        return "redirect:/taskList/tasks/"+ task.getId() ;
 
     }
+
+    @GetMapping("/tasks/{id}/sub/create")
+    public String subTaskPage(Model model, @PathVariable UUID id){
+        return "createsSub";
+    }
+
+    @PostMapping("/{taskid}/sub/create/task")
+    public String addSubtask(Model model, @PathVariable UUID taskid, @ModelAttribute Subtask subtask){
+        taskList.findTaskById(taskid).addSubtask(subtask);
+        return "redirect:/taskList/tasks/"+ taskid;
+    }
+
 }

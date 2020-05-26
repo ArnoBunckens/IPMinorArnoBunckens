@@ -12,5 +12,20 @@
     <tr th:text="${taakje.dueDate}"></tr><br/>
 </table>
 
+<table>
+<tr th:each="r: ${taakjes}">
+
+
+    <td th:text="${r.titel}"/>
+    <td th:text="${r.description}"/>
+
+</tr>
+</table>
+
+<p>
+    <a th:href="@{/taskList/tasks/__${id}__/sub/create}"> Add subtask</a>
+</p>
+
+
 </body>
 </html>

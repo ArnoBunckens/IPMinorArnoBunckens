@@ -25,7 +25,7 @@ public class DB implements TaskList {
     public Task findDescription(UUID id) {
         Task description = null;
         for(Task x : tasks){
-            if(x.id.equals(id)){
+            if(x.getId().equals(id)){
                 description =  x;
             }
         }
@@ -36,7 +36,7 @@ public class DB implements TaskList {
     public Task findTaskById(UUID id) {
 
         for(Task x : tasks){
-            if(x.id.equals(id)){
+            if(x.getId().equals(id)){
                 return x;
             }
             else return null;
@@ -51,7 +51,7 @@ public class DB implements TaskList {
 
     public void updateTask(Task task){
         for(Task x : tasks){
-            if(x.id.equals(task.id)){
+            if(x.getId().equals(task.getId())){
                 x.setNaam(task.getNaam());
                 x.setDueDate(task.getDateTime());
                 x.setDescription(task.getDescription());
@@ -59,7 +59,4 @@ public class DB implements TaskList {
             }
         }
     }
-
-
-
 }
