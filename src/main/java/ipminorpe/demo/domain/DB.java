@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class DB implements TaskList {
@@ -12,7 +13,7 @@ public class DB implements TaskList {
 
     public DB(){
         this.tasks = new ArrayList<>();
-        tasks.add(new Task("1", "Voetballen", LocalDateTime.of(2020,2,27,21,30), "Leuke avond weer"));
+        tasks.add(new Task( "Voetballen", LocalDateTime.of(2020,2,27,21,30), "Leuke avond weer"));
     }
 
     @Override
@@ -21,14 +22,18 @@ public class DB implements TaskList {
     }
 
     @Override
-    public Task findDescription(String id) {
+    public Task findDescription(UUID id) {
         Task description = null;
         for(Task x : tasks){
-            if(x.id.equalsIgnoreCase(id)){
+            if(x.id.equals(id)){
                 description =  x;
             }
         }
         return description;
+    }
+
+    public void addTask(Task task){
+        tasks.add(task);
     }
 
 

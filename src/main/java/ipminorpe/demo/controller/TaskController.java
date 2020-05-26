@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.model.IModel;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/TaskList")
@@ -17,14 +19,30 @@ public class TaskController {
     DB taskList;
 
     @GetMapping("/Tasks")
-    public String tasks(Model model){
+    public String tasks(Model model) {
         model.addAttribute("tasks", taskList.getAll());
         return "tasks";
     }
 
-   @GetMapping("/Tasks/{id}")
-    public String taskDetail(Model model, @PathVariable int id) {
-        model.addAttribute("taakje", taskList.findDescription(String.valueOf(id)));
+    @GetMapping("/Tasks/{id}")
+    public String taskDetail(Model model, @PathVariable UUID id) {
+        model.addAttribute("taakje", taskList.findDescription(id));
         return "taskDetail";
+    }
+
+    @GetMapping("/new")
+    public String newTask(Model model) {
+
+        return "addTask";
+
+    }
+
+    @PostMapping("/add")
+    public String addTask(Model model, @ModelAttribute Task task) {
+
+        taskList.addTask(task);
+        System.out.println(task.toString());
+        return "redirect:/TaskList/Tasks";
+
     }
 }
