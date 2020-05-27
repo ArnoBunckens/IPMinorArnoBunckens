@@ -5,6 +5,8 @@
     <title>Overview</title>
 </head>
 <body>
+<nav th:replace="fragments/header"></nav>
+
 <table>
     <tr>
         <th>id</th>
@@ -15,13 +17,13 @@
     <tr th:each="r: ${tasks}">
 
         <td>
-            <a th:href="@{/taskList/tasks/{id} (id=${r.id})}"
+            <a th:href="@{/tasks/{id} (id=${r.id})}"
                th:text="${r.id}"></a>
         </td>
         <td th:text="${r.naam}"/>
         <td th:text="${r.dueDate}"/>
         <td>
-            <a th:href="@{/taskList/edit/{id} (id=${r.id})}"> Edit Task</a>
+            <a th:href="@{/edit/{id} (id=${r.id})}"> Edit Task</a>
         </td>
 
     </tr>

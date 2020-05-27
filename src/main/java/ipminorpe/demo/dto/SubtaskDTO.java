@@ -1,25 +1,12 @@
-package ipminorpe.demo.domain;
+package ipminorpe.demo.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.List;
 import java.util.UUID;
 
-@Entity
-public class Subtask {
-    @Id
-    @GeneratedValue
+public class SubtaskDTO {
     private UUID id;
     private String titel, description;
 
-    public Subtask(String titel, String description) {
-        this.id = UUID.randomUUID();
-        this.titel = titel;
-        this.description = description;
-    }
-
-    public Subtask() {
+    public SubtaskDTO() {
         this.id = UUID.randomUUID();
     }
 
@@ -48,3 +35,4 @@ public class Subtask {
     }
 
 }
+

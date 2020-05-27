@@ -2,6 +2,7 @@ package ipminorpe.demo.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -11,14 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
 public class Task {
+    @Id
+    @GeneratedValue
     private UUID id;
     private String naam;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime;
     private String dueDate;
     private String description;
-    private ArrayList<Subtask> subtasks;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Subtask> subtasks;
 
 
     public Task(String naam, LocalDateTime dateTime, String description) {
@@ -31,12 +36,16 @@ public class Task {
 
     }
 
+    public Task() {
+        this.subtasks = new ArrayList<>();
+    }
 
-    public ArrayList<Subtask> getSubtasks() {
+
+    public List<Subtask> getSubtasks() {
         return subtasks;
     }
 
-    public void setSubtasks(ArrayList<Subtask> subtasks) {
+    public void setSubtasks(List<Subtask> subtasks) {
         this.subtasks = subtasks;
     }
 
@@ -90,10 +99,16 @@ public class Task {
     }
 
     public void addSubtask(Subtask subtask){
-        subtasks.add(subtask);
+        this.subtasks.add(subtask);
     }
 
-    public List<Subtask> getAllSubtasks() {
-        return this.subtasks;
+
+    public Subtask getSubtaskById(Subtask subtask){
+        for(Subtask s : this.subtasks){
+            if(s.getId().equals(subtask.getId())){
+                return s;
+            }
+        }
+        return null;
     }
 }

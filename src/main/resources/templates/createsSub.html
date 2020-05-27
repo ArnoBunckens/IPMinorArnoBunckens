@@ -6,7 +6,9 @@
 </head>
 <body>
 
-<form th:action="@{/taskList/__${id}__/sub/create/task}" method="post">
+<nav th:replace="fragments/header"></nav>
+
+<form th:action="@{/__${id}__/sub/create/task}" method="post">
 
     <label for="titel">Subtask name</label>
     <input type="text" name="titel" id="titel">

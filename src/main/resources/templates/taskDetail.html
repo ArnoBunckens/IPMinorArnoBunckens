@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<nav th:replace="fragments/header"></nav>
+
 <table>
     <tr th:text="${taakje.naam}"></tr><br/>
     <tr th:text="${taakje.description}"></tr><br/>
@@ -13,6 +15,7 @@
 </table>
 
 <table>
+
 <tr th:each="r: ${taakjes}">
 
 
@@ -23,7 +26,7 @@
 </table>
 
 <p>
-    <a th:href="@{/taskList/tasks/__${id}__/sub/create}"> Add subtask</a>
+    <a th:href="@{/tasks/__${id}__/sub/create}"> Add subtask</a>
 </p>
 
 

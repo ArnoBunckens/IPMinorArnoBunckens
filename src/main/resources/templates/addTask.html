@@ -6,7 +6,9 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/taskList/add}" method="post">
+<nav th:replace="fragments/header"></nav>
+
+<form action="#" th:action="@{/add}" method="post">
 
     <label for="naam"></label>
     <input type="text" name="naam" id="naam" >
