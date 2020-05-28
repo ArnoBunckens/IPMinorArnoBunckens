@@ -3,6 +3,7 @@ package ipminorpe.demo.dto;
 import ipminorpe.demo.domain.Subtask;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -15,8 +16,8 @@ public class TaskDTO {
     private String naam;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime;
-    private String dueDate;
     private String description;
+    @OneToMany
     private List<SubtaskDTO> subtasks;
 
     public TaskDTO() {
@@ -55,14 +56,6 @@ public class TaskDTO {
         this.naam = naam;
     }
 
-    public void setDueDate(LocalDateTime dateTime) {
-        this.dueDate = dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT));
-
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -80,18 +73,6 @@ public class TaskDTO {
         subtasks.add(subtask);
     }
 
-    public void deleteSubtask(String subtask){
-        SubtaskDTO subtask1 = null;
-        for(SubtaskDTO s : subtasks){
-            if(s.getTitel().equalsIgnoreCase(subtask)){
-                subtask1 = s;
-
-            }
-
-        }
-        subtasks.remove(subtask1);
-
-    }
     public SubtaskDTO getSubtask(UUID id){
         for(SubtaskDTO s : subtasks){
             if(s.getId().equals(id)){
@@ -100,7 +81,6 @@ public class TaskDTO {
         }
         return null;
     }
-
 
     public List<SubtaskDTO> getSubtasks() {
         return subtasks;

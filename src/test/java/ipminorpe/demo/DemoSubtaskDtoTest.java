@@ -12,6 +12,7 @@ public class DemoSubtaskDtoTest {
 
     SubtaskDTO dto = new SubtaskDTO();
 
+
     @Test
     public void settersTest(){
         dto.setTitel("titel");
@@ -19,5 +20,7 @@ public class DemoSubtaskDtoTest {
         assertEquals("titel", dto.getTitel());
         assertEquals("description", dto.getDescription());
     }
+
+
 
 }

@@ -26,6 +26,7 @@ public interface TaskListService {
 
     public void editTaskByTaskDTO(TaskDTO taskDTO);
 
+    public void addTask(Task task);
 
 }
 
