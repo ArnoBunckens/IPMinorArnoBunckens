@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head >
     <meta charset="UTF-8">
     <title>Overview</title>
 </head>
 <body>
-<nav th:replace="fragments/header"></nav>
+<header th:replace="fragments/header"></header>
 
 <table>
     <tr>
-        <th>id</th>
-        <th>Name</th>
-        <th>Time</th>
+        <th th:text="#{ID}"></th>
+        <th th:text="#{Name}"></th>
+        <th th:text="#{DueDate}"></th>
     </tr>
 
     <tr th:each="r: ${tasks}">
@@ -21,9 +21,9 @@
                th:text="${r.id}"></a>
         </td>
         <td th:text="${r.naam}"/>
-        <td th:text="${r.dueDate}"/>
+        <td th:text="${r.dateTime}"/>
         <td>
-            <a th:href="@{/edit/{id} (id=${r.id})}"> Edit Task</a>
+            <a th:href="@{/edit/{id} (id=${r.id})}" th:text="#{EditTask}"></a>
         </td>
 
     </tr>

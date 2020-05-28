@@ -6,21 +6,21 @@
 </head>
 <body>
 
-<nav th:replace="fragments/header"></nav>
+<header th:replace="fragments/header"></header>
 
 <form action="#" th:action="@{/add}" method="post">
 
-    <label for="naam"></label>
-    <input type="text" name="naam" id="naam" >
+    <label for="naam" th:text="#{Name}"></label>
+    <input type="text" name="naam" id="naam" ><br/>
 
-    <label for="description"></label>
-    <input type="text" name="description" id="description">
+    <label for="description" th:text="#{Description}"></label>
+    <input type="text" name="description" id="description"><br/>
 
-    <label for="dateTime"></label>
-    <input type="datetime-local" name="dateTime" id="dateTime">
+    <label for="dateTime" th:text="#{DueDate}"></label>
+    <input type="datetime-local" name="dateTime" id="dateTime"><br/>
 
 
-    <input type="submit">
+    <input type="submit"  th:value="#{Submit}">
 </form>
 
 </body>

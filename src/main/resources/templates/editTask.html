@@ -5,25 +5,27 @@
     <title>Title</title>
 </head>
 <body>
-<nav th:replace="fragments/header"></nav>
+<header th:replace="fragments/header"></header>
 
 
 <form th:action="@{/confEdit}" th:object="${taak}" method="post">
 
     <input type="hidden" th:value="*{id}" name="nummer">
 
-    <input type="text" th:field="*{naam}" name="naam" id="naam">
-    <label for="naam"></label>
+
+    <label for="naam" th:text="#{Name}"></label>
+    <input type="text" th:field="*{naam}" name="naam" id="naam"><br/>
 
 
-    <label for="description"></label>
-    <input type="text" name="description" id="description" th:field="*{description}">
 
-    <label for="dateTime"></label>
-    <input type="datetime-local" name="dateTime" id="dateTime" th:field="*{dateTime}">
+    <label for="description" th:text="#{Description}"></label>
+    <input type="text" name="description" id="description" th:field="*{description}"><br/>
+
+    <label for="dateTime" th:text="#{DueDate}"></label>
+    <input type="datetime-local" name="dateTime" id="dateTime" th:field="*{dateTime}"><br/>
 
 
-    <input type="submit">
+    <input type="submit" th:value="#{Submit}">
 </form>
 
 </body>

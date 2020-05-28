@@ -6,17 +6,17 @@
 </head>
 <body>
 
-<nav th:replace="fragments/header"></nav>
+<header th:replace="fragments/header"></header>
 
 <form th:action="@{/__${id}__/sub/create/task}" method="post">
 
-    <label for="titel">Subtask name</label>
-    <input type="text" name="titel" id="titel">
+    <label for="titel" th:text="#{Name}"></label>
+    <input type="text" name="titel" id="titel"><br/>
 
-    <label for="description">Subtask Description</label>
-    <input type="text" name="description" id="description">
+    <label for="description" th:text="#{Description}">Subtask Description</label>
+    <input type="text" name="description" id="description"><br/>
 
-    <input type="submit">
+    <input type="submit" th:value="#{Submit}">
 </form>
 
 </body>
