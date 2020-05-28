@@ -20,7 +20,6 @@ public class Task {
     private String naam;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime;
-    private String dueDate;
     private String description;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Subtask> subtasks;
@@ -30,7 +29,6 @@ public class Task {
         this.id = UUID.randomUUID();
         this.naam = naam;
         this.dateTime = dateTime;
-        setDueDate(dateTime);
         this.description = description;
         this.subtasks = new ArrayList<>();
 
@@ -70,9 +68,7 @@ public class Task {
         return dateTime;
     }
 
-    public String getDueDate() {
-        return dueDate;
-    }
+
 
 
     public void setNaam(String naam) {
@@ -85,17 +81,6 @@ public class Task {
 
     public UUID getId() {
         return id;
-    }
-
-
-
-    public void setDueDate(LocalDateTime dateTime) {
-        this.dueDate = dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT));
-
-    }
-
-    public String toString(){
-        return this.getId() + this.getNaam() + this.getDateTime() + this.getDescription();
     }
 
     public void addSubtask(Subtask subtask){

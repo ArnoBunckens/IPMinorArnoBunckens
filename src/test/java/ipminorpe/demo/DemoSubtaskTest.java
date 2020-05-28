@@ -31,4 +31,12 @@ public class DemoSubtaskTest {
         assertEquals("hoe", subtask.getTitel());
         assertEquals("Gaat het", subtask.getDescription());
     }
+
+    @Test
+    public void setterTest(){
+        subtask.setDescription("hoi");
+        subtask.setTitel("titel");
+        assertEquals("titel", subtask.getTitel());
+        assertEquals("hoi",subtask.getDescription());
+    }
 }

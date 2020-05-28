@@ -2,7 +2,9 @@ package ipminorpe.demo.dto;
 
 import java.util.UUID;
 
+
 public class SubtaskDTO {
+
     private UUID id;
     private String titel, description;
 
