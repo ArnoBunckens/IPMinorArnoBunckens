@@ -6,40 +6,74 @@ import ipminorpe.demo.domain.Task;
 import ipminorpe.demo.dto.TaskDTO;
 import ipminorpe.demo.service.TaskListService;
 import ipminorpe.demo.service.TaskListServiceImp;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
+
+
+import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
+
+@Transactional
 @SpringBootTest
 public class DemoTaskListServiceImpTest {
-    TaskListService testTastService;
+    @Autowired
+    TaskListService taskListService;
     TaskDTO dto = new TaskDTO();
 
-    @BeforeTestClass
+    @BeforeEach
     public void setup() {
         dto.setNaam("Plswork");
         dto.setDateTime(LocalDateTime.of(2020, 12, 12, 12, 12));
-        dto.setDescription("Test description");
-        testTastService.addTask(dto);
-    
-    TaskDTO dto = new TaskDTO();
+        dto.setDescription("description");
+        dto.setId(UUID.randomUUID());
+        System.out.println(dto.toString());
+        System.out.println(taskListService.toString() + "Service");
+        taskListService.addTask(dto);
 
-    @BeforeTestClass
-    public void setup() {
-        dto.setNaam("Fantastisch");
-        dto.setDateTime(LocalDateTime.of(2020,12,31,23,59));
-        dto.setDescription("Niks werkt");
-        testTastService.addTask(dto);
     }
+
 
     @Test
     public void testGetAll(){
+        assertEquals(1, taskListService.getAll().size());
+    }
+
+    @Test
+    public void testAddTaskDTO(){
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setNaam("Naam");
+        taskDTO.setDateTime(LocalDateTime.of(2021,1,1,11,11));
+
+        taskDTO.setDescription("description");
+        taskListService.addTask(taskDTO);
+        assertEquals(2,taskListService.getAll().size());
+    }
+
+    @Test
+    public void testAddTask(){
+        taskListService.addTask("Taakje", LocalDateTime.of(2020,12,12,12,12), "Hoi");
+        assertEquals(2,taskListService.getAll().size());
+    }
+
+    @Test
+    public void getTaskByIdTest(){
+        UUID id = UUID.randomUUID();
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setId(id);
+        taskDTO.setNaam("naam");
+        taskDTO.setDescription("desc");
+        taskListService.addTask(taskDTO);
+        TaskDTO newDto = taskListService.getTaskDTOById(id);
+        assertEquals(taskDTO, taskListService.getTaskDTOById(id));
 
     }
+    
 }
 
