@@ -26,8 +26,20 @@ public class DemoTaskListServiceImpTest {
         dto.setDateTime(LocalDateTime.of(2020, 12, 12, 12, 12));
         dto.setDescription("Test description");
         testTastService.addTask(dto);
+    
+    TaskDTO dto = new TaskDTO();
 
+    @BeforeTestClass
+    public void setup() {
+        dto.setNaam("Fantastisch");
+        dto.setDateTime(LocalDateTime.of(2020,12,31,23,59));
+        dto.setDescription("Niks werkt");
+        testTastService.addTask(dto);
     }
 
-    noice
+    @Test
+    public void testGetAll(){
+
+    }
 }
+
