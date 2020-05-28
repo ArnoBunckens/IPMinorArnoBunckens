@@ -62,18 +62,6 @@ public class DemoTaskListServiceImpTest {
         assertEquals(2,taskListService.getAll().size());
     }
 
-    @Test
-    public void getTaskByIdTest(){
-        UUID id = UUID.randomUUID();
-        TaskDTO taskDTO = new TaskDTO();
-        taskDTO.setId(id);
-        taskDTO.setNaam("naam");
-        taskDTO.setDescription("desc");
-        taskListService.addTask(taskDTO);
-        TaskDTO newDto = taskListService.getTaskDTOById(id);
-        assertEquals(taskDTO, taskListService.getTaskDTOById(id));
-
-    }
-    
+  
 }
 
