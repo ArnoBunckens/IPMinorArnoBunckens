@@ -2,7 +2,9 @@ package ipminorpe.demo;
 
 
 import ipminorpe.demo.db.DbRepo;
+import ipminorpe.demo.domain.Subtask;
 import ipminorpe.demo.domain.Task;
+import ipminorpe.demo.dto.SubtaskDTO;
 import ipminorpe.demo.dto.TaskDTO;
 import ipminorpe.demo.service.TaskListService;
 import ipminorpe.demo.service.TaskListServiceImp;
@@ -49,7 +51,7 @@ public class DemoTaskListServiceImpTest {
     public void testAddTaskDTO(){
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.setNaam("Naam");
-        taskDTO.setDateTime(LocalDateTime.of(2021,1,1,11,11));
+        taskDTO.setDateTime(LocalDateTime.of(2020,12,12,12,12));
 
         taskDTO.setDescription("description");
         taskListService.addTask(taskDTO);
@@ -62,6 +64,33 @@ public class DemoTaskListServiceImpTest {
         assertEquals(2,taskListService.getAll().size());
     }
 
-  
+    @Test
+    public void testGetDTOByID(){
+        TaskDTO t = taskListService.getAll().get(0);
+        UUID x = t.getId();
+        assertEquals(t.getNaam(),taskListService.getTaskDTOById(x).getNaam());
+    }
+
+    @Test
+    public void testGetByID(){
+        taskListService.addTask("titeltje",LocalDateTime.of(2020,12,12,12,12),"iets" );
+        TaskDTO t = taskListService.getAll().get(taskListService.getAll().size()-1);
+        UUID x = t.getId();
+        assertEquals("titeltje", taskListService.getTaskById(x).getNaam());
+    }
+
+    @Test
+    public void testAddSubTask(){
+        taskListService.addTask("titel", LocalDateTime.of(2020,12,12,12,12), "iets");
+        TaskDTO t = taskListService.getAll().get(taskListService.getAll().size()-1);
+
+        SubtaskDTO dto = new SubtaskDTO();
+        dto.setTitel("titel2");
+        dto.setDescription("iets2");
+        taskListService.addSubtask(t.getId(), dto);
+        assertEquals(1, taskListService.getTaskDTOById(t.getId()).getSubtasks().size());
+    }
+
+
 }
 

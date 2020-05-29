@@ -12,6 +12,7 @@ import java.util.UUID;
 public interface TaskListService {
     List<TaskDTO> getAll();
 
+
     void addTask(TaskDTO task);
 
     public TaskDTO getTaskDTOById(UUID id);
