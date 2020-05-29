@@ -43,12 +43,12 @@ public class DemoTaskListServiceImpTest {
 
 
     @Test
-    public void testGetAll(){
+    public void getAllTest(){
         assertEquals(1, taskListService.getAll().size());
     }
 
     @Test
-    public void testAddTaskDTO(){
+    public void addTaskDTOTest(){
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.setNaam("Naam");
         taskDTO.setDateTime(LocalDateTime.of(2020,12,12,12,12));
@@ -59,20 +59,20 @@ public class DemoTaskListServiceImpTest {
     }
 
     @Test
-    public void testAddTask(){
+    public void dddTaskTest(){
         taskListService.addTask("Taakje", LocalDateTime.of(2020,12,12,12,12), "Hoi");
         assertEquals(2,taskListService.getAll().size());
     }
 
     @Test
-    public void testGetDTOByID(){
+    public void getDTOByIDTest(){
         TaskDTO t = taskListService.getAll().get(0);
         UUID x = t.getId();
         assertEquals(t.getNaam(),taskListService.getTaskDTOById(x).getNaam());
     }
 
     @Test
-    public void testGetByID(){
+    public void getByIDTest(){
         taskListService.addTask("titeltje",LocalDateTime.of(2020,12,12,12,12),"iets" );
         TaskDTO t = taskListService.getAll().get(taskListService.getAll().size()-1);
         UUID x = t.getId();
@@ -80,7 +80,7 @@ public class DemoTaskListServiceImpTest {
     }
 
     @Test
-    public void testAddSubTask(){
+    public void addSubTaskTest(){
         taskListService.addTask("titel", LocalDateTime.of(2020,12,12,12,12), "iets");
         TaskDTO t = taskListService.getAll().get(taskListService.getAll().size()-1);
 
