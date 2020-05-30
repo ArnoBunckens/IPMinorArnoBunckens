@@ -8,13 +8,19 @@
 
 <header th:replace="fragments/header"></header>
 
-<table>
+<table th:if="${taakje} != null">
     <tr th:text="${taakje.naam}"></tr><br/>
     <tr th:text="${taakje.description}"></tr><br/>
-    <tr th:text="${taakje.dueDate}"></tr><br/>
+    <tr th:text="${taakje.dateTime}"></tr><br/>
 </table>
 
-<table>
+<p th:if="${taakje} == null" th:text="#{NoTaskFound}">
+
+</p>
+
+
+<table  th:if="${taakje} != null">
+
 
 <tr th:each="r: ${taakjes}">
 
